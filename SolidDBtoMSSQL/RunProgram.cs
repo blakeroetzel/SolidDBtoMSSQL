@@ -27,35 +27,35 @@ namespace SolidDBtoMSSQL
             Dictionary<string, DataTable> returnedDT = new Dictionary<string, DataTable>();
 
             // Populate Collection
-            // Add new tables here and they will be copied
+            // Add new tables here and they will be copied (Delete mine or it won't work for you.
 
-            tables.Add(new table("ABAN_STAFF_EFF", false, new List<string> { "Interval", "Split_Number" }, DateString("INTERVAL", date)));
-            tables.Add(new table("AGENT_VIEW", false, new List<string> { "INTERVAL", "AGENT_ID", "SPLIT_NUMBER" }, DateString("INTERVAL", date)));
-            tables.Add(new table("CALL", true, new List<string> { "CID" }, DateString("START_TIME", date)));
-            tables.Add(new table("CALL_CENTER_ARCHIVES", false, new List<string> { "CONVID", "SEGMENT" }, DateString("CALL_DATE", date)));
-            tables.Add(new table("INTERVAL_SPLIT_STATS", false, new List<string> { "SPLIT_NUMBER", "INTERVAL", "MEDIA_TYPE", "SERVER_ID" }, DateString("INTERVAL", date)));
-            tables.Add(new table("CALL_CENTER_SPLITS", true, new List<string> { "SPLIT_NUMBER" }, ""));
-            tables.Add(new table("CALL_CENTER_MEDIAS", true, new List<string> { "MEDIA_TYPE" }, ""));
-            tables.Add(new table("DAILY_SPLIT_SERVICE_LEVEL", false, new List<string> { "SPLIT_NUMBER", "MEDIA_TYPE", "INTERVAL_DATE" }, DateString("INTERVAL_DATE", date)));
-            tables.Add(new table("INTERVAL_SKILL_STATS", false, new List<string> { "SPLIT_NUMBER", "SKILL_NUMBER", "INTERVAL", "MEDIA_TYPE", "SERVER_ID" }, DateString("INTERVAL", date)));
-            tables.Add(new table("CALL_CENTER_SKILLS", true, new List<string> { "SKILL_NUMBER" }, ""));
-            tables.Add(new table("INTERVAL_AGENT_STATS", false, new List<string> { "AGENT_ID", "SPLIT_NUMBER", "INTERVAL", "MEDIA_TYPE", "SERVER_ID" }, DateString("INTERVAL", date)));
-            tables.Add(new table("DAILY_AGENT_IDLE_STATS", false, new List<string> { "AGENT_ID", "SPLIT_NUMBER", "INTERVAL", "IDLE_CODE", "SERVER_ID" }, DateString("INTERVAL", date)));
-            tables.Add(new table("CRM_TYPES", true, new List<string> { "CRM_TYPE" }, ""));
-            tables.Add(new table("CALL_CENTER_AGENTS", true, new List<string> { "AGENT_ID" }, ""));
-            tables.Add(new table("IDLE_REASONS", true, new List<string> { "IDLE_REASON" }, ""));
-            tables.Add(new table("EVENT_LOG", false, new List<string> { "EVENT_DATE", "BANK", "CHANNEL", "SPLIT_NUMBER", "AGENT_ID", "EVENT_TYPE", "EVENT_DATA", "EVENT_SOURCE" }, DateString("EVENT_DATE", date)));
-            tables.Add(new table("ABANDON_CALL", false, new List<string> { "CONVID", "SEGMENT" }, DateString("CALL_DATE", date)));
-            tables.Add(new table("SERVICE", true, new List<string> { "SID" }, DateString("START_TIME", date)));
-            tables.Add(new table("CONVERSATION", false, new List<string> { "CONVID", "SEGMENT" }, DateString("START_TIME", date)));
-            tables.Add(new table("CONVERSATION_DETAIL", false, new List<string> { "CONVID", "SEGMENT", "SEQUENCE" }, DateString("TIMESTAMP", date)));
-            tables.Add(new table("EVENT_DESCRIPTIONS", true, new List<string> { "EVENT_TYPE" }, ""));
-            tables.Add(new table("CRM_TICKETS", true, new List<string> { "TICKET_ID" }, ""));
-            tables.Add(new table("TICKET_ACTIVITIES", false, new List<string> { "TICKET_ID", "ACTIVITY_ID" }, DateString("DATE_OPENED", date)));
-            tables.Add(new table("EVDES", false, new List<string> { "SERVICE", "EVENT_ORDER", }, ""));
-            tables.Add(new table("EVSUM", false, new List<string> { "SUMID", "EVENT_NUMBER" }, ""));
-            tables.Add(new table("EVENTS", false, new List<string> { "SID", "EVENT_NUMBER" }, ""));
-            tables.Add(new table("SERVICE", true, new List<string> { "SID" }, DateString("START_TIME", date)));
+            tables.Add(new table("ABAN_STAFF_EFF", false, new List<string> { "Interval", "Split_Number" }, DateString("INTERVAL", date), config));
+            tables.Add(new table("AGENT_VIEW", false, new List<string> { "INTERVAL", "AGENT_ID", "SPLIT_NUMBER" }, DateString("INTERVAL", date), config));
+            tables.Add(new table("CALL", true, new List<string> { "CID" }, DateString("START_TIME", date), config));
+            tables.Add(new table("CALL_CENTER_ARCHIVES", false, new List<string> { "CONVID", "SEGMENT" }, DateString("CALL_DATE", date), config));
+            tables.Add(new table("INTERVAL_SPLIT_STATS", false, new List<string> { "SPLIT_NUMBER", "INTERVAL", "MEDIA_TYPE", "SERVER_ID" }, DateString("INTERVAL", date), config));
+            tables.Add(new table("CALL_CENTER_SPLITS", true, new List<string> { "SPLIT_NUMBER" }, "", config));
+            tables.Add(new table("CALL_CENTER_MEDIAS", true, new List<string> { "MEDIA_TYPE" }, "", config));
+            tables.Add(new table("DAILY_SPLIT_SERVICE_LEVEL", false, new List<string> { "SPLIT_NUMBER", "MEDIA_TYPE", "INTERVAL_DATE" }, DateString("INTERVAL_DATE", date), config));
+            tables.Add(new table("INTERVAL_SKILL_STATS", false, new List<string> { "SPLIT_NUMBER", "SKILL_NUMBER", "INTERVAL", "MEDIA_TYPE", "SERVER_ID" }, DateString("INTERVAL", date), config));
+            tables.Add(new table("CALL_CENTER_SKILLS", true, new List<string> { "SKILL_NUMBER" }, "", config));
+            tables.Add(new table("INTERVAL_AGENT_STATS", false, new List<string> { "AGENT_ID", "SPLIT_NUMBER", "INTERVAL", "MEDIA_TYPE", "SERVER_ID" }, DateString("INTERVAL", date), config));
+            tables.Add(new table("DAILY_AGENT_IDLE_STATS", false, new List<string> { "AGENT_ID", "SPLIT_NUMBER", "INTERVAL", "IDLE_CODE", "SERVER_ID" }, DateString("INTERVAL", date), config));
+            tables.Add(new table("CRM_TYPES", true, new List<string> { "CRM_TYPE" }, "", config));
+            tables.Add(new table("CALL_CENTER_AGENTS", true, new List<string> { "AGENT_ID" }, "", config));
+            tables.Add(new table("IDLE_REASONS", true, new List<string> { "IDLE_REASON" }, "", config));
+            tables.Add(new table("EVENT_LOG", false, new List<string> { "EVENT_DATE", "BANK", "CHANNEL", "SPLIT_NUMBER", "AGENT_ID", "EVENT_TYPE", "EVENT_DATA", "EVENT_SOURCE" }, DateString("EVENT_DATE", date), config));
+            tables.Add(new table("ABANDON_CALL", false, new List<string> { "CONVID", "SEGMENT" }, DateString("CALL_DATE", date), config));
+            tables.Add(new table("SERVICE", true, new List<string> { "SID" }, DateString("START_TIME", date), config));
+            tables.Add(new table("CONVERSATION", false, new List<string> { "CONVID", "SEGMENT" }, DateString("START_TIME", date), config));
+            tables.Add(new table("CONVERSATION_DETAIL", false, new List<string> { "CONVID", "SEGMENT", "SEQUENCE" }, DateString("TIMESTAMP", date), config));
+            tables.Add(new table("EVENT_DESCRIPTIONS", true, new List<string> { "EVENT_TYPE" }, "", config));
+            tables.Add(new table("CRM_TICKETS", true, new List<string> { "TICKET_ID" }, "", config));
+            tables.Add(new table("TICKET_ACTIVITIES", false, new List<string> { "TICKET_ID", "ACTIVITY_ID" }, DateString("DATE_OPENED", date), config));
+            tables.Add(new table("EVDES", false, new List<string> { "SERVICE", "EVENT_ORDER", }, "", config));
+            tables.Add(new table("EVSUM", false, new List<string> { "SUMID", "EVENT_NUMBER" }, "", config));
+            tables.Add(new table("EVENTS", false, new List<string> { "SID", "EVENT_NUMBER" }, "", config));
+            tables.Add(new table("SERVICE", true, new List<string> { "SID" }, DateString("START_TIME", date), config));
 
 
             // List of tasks (Data all pulls at once asynchronously)
@@ -84,7 +84,7 @@ namespace SolidDBtoMSSQL
             }
 
             // Bulk copy data for each table.
-            SqlConnection bulkconn = new SqlConnection("server=tcectx-db-01;uid=broetzel;pwd=tcec1234!;database=Centurion");
+            SqlConnection bulkconn = new SqlConnection($"server={config["MSSQLServer"]};uid={config["MSSQLUid"]};pwd={config["MSSQLPwd"]};database={config["MSSQLDatabase"]}");
             bulkconn.Open();
             foreach (var table in tables) {
                 if (table.returnedData == null)
@@ -93,7 +93,7 @@ namespace SolidDBtoMSSQL
                     new Service1().WriteToFile($"Skipping {table.name}. No data returned.");
                     continue;
                 }
-                using (var bulkCopy = new SqlBulkCopy("server=tcectx-db-01;uid=broetzel;pwd=tcec1234!;database=Centurion", SqlBulkCopyOptions.FireTriggers))
+                using (var bulkCopy = new SqlBulkCopy($"server={config["MSSQLServer"]};uid={config["MSSQLUid"]};pwd={config["MSSQLPwd"]};database={config["MSSQLDatabase"]}", SqlBulkCopyOptions.FireTriggers))
                 {
                     foreach (DataColumn col in table.returnedData.Columns)
                     {

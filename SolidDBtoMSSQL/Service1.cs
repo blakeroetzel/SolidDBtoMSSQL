@@ -24,6 +24,9 @@ namespace SolidDBtoMSSQL
         // Update this path to the path of your config file
         static string local = "C:/Dev/SolidDBtoMSSQL/.local/config.conf";
         
+        /// <summary>
+        /// Reads the config file at 'local' location
+        /// </summary>
         public void readConfig()
         {
             using (StreamReader sr = new StreamReader(local + "config.conf"))
@@ -35,41 +38,6 @@ namespace SolidDBtoMSSQL
                     config[linesplit[0]] = linesplit[1];
                 }
             }
-        }
-
-        public void smtpMail(string messageText, string userName, string password)
-        {
-            SmtpClient client = new SmtpClient("email-smtp.us-east-1.amazonaws.com", 587);
-            client.EnableSsl = true;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.Credentials = new System.Net.NetworkCredential(config["userName"], config["password"]);
-            MailAddress from = new MailAddress("Tcectexas@roetzelfamily.com", "TCEC Error");
-            MailAddress to = new MailAddress("broetzel@tcectexas.com");
-            MailMessage message = new MailMessage(from, to);
-            var host = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
-            messageText += $"\n{versionNum}";
-            messageText = messageText + $"\n\nFrom {serviceName}. \n";
-            var mName = Environment.MachineName;
-            messageText += mName;
-            foreach (var ip in host)
-            {
-                messageText = messageText + $"\n{ip.ToString()}";
-            }
-            message.Body = messageText;
-            message.Subject = $"{serviceName} Error";
-            try
-            {
-                client.Send(message);
-            }
-            catch (System.Net.Sockets.SocketException e)
-            {
-                WriteToFile($"{serviceName} Error: " + e.ToString());
-            }
-            catch (System.Net.Mail.SmtpException e)
-            {
-                WriteToFile($"{serviceName} Error: " + e.ToString());
-            }
-            client.Dispose();
         }
 
         public async void OnDebug()

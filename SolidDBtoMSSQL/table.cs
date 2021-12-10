@@ -52,7 +52,7 @@ namespace SolidDBtoMSSQL
         /// <param name="p">Bool of whether there is a single primary key, or a combo</param>
         /// <param name="k">List of the primary keys. (List of single item if one key)</param>
         /// <param name="d">Date string to query this table. (Can be blank if not applicable)</param>
-        public table(string n, bool p, List<string> k, string d)
+        public table(string n, bool p, List<string> k, string d, Dictionary<string,string> config)
         {
             // Set up my variables.
             this.name = n;
@@ -74,7 +74,7 @@ namespace SolidDBtoMSSQL
             }
 
             // Get the columns
-            OdbcConnection odbc = new OdbcConnection("DSN=CARES_SOL_CR9;UID=sti;pwd=sti;");
+            OdbcConnection odbc = new OdbcConnection($"DSN={config["SOLIDDSN"]};UID={config["SOLIDUID"]};pwd={config["SOLIDPWD"]};");
             OdbcCommand getColumns = new OdbcCommand($"SELECT COLUMN_NAME, DATA_TYPE FROM _SYSTEM.COLUMNS where TABLE_NAME = '{n}'", odbc);
             odbc.Open();
             using (OdbcDataReader reader = getColumns.ExecuteReader())
