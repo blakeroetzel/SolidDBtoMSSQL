@@ -62,7 +62,7 @@ namespace SolidDBtoMSSQL
             Task[] tasks = { };
             IEnumerable<Task<int>> getDataQuery =
                 from table in tables
-                select table.GetDataAsync();
+                select table.GetDataAsync(config);
 
 
             // Execute the tasks and wait for them to be done.

@@ -154,7 +154,7 @@ namespace SolidDBtoMSSQL
         /// Gather data for this table.
         /// </summary>
         /// <returns>Runs as task, returns task.</returns>
-        public Task<int> GetDataAsync()
+        public Task<int> GetDataAsync(Dictionary<string,string> config)
         {
             return Task.Run(() =>
             {
@@ -183,7 +183,7 @@ namespace SolidDBtoMSSQL
                 }
 
                 // Make the Centurion connection and run the query.
-                OdbcConnection odbc = new OdbcConnection("DSN=CARES_SOL_CR9;UID=sti;PWD=sti;");
+                OdbcConnection odbc = new OdbcConnection($"DSN={config["SolidDNS"]};UID={config["SolidUID"]};PWD={config["SolidPWD"]};");
                 OdbcCommand odbcomm = new OdbcCommand($"SELECT {columnString} FROM {this.name} {this.dateString}", odbc);
                 odbc.Open();
                 try
