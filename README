@@ -1,0 +1,10 @@
+You need to create a config file for the program to function called config.conf and point to it in Service1.cs line 25
+
+It needs to be formatted like so:
+SolidDSN=mysoliddns
+SolidUID=mysoliduid
+SolidPWD=mysolidpwd
+MSSQLServer=myserver
+MSSQLUid=mymssqluid
+MSSQLPwd=mymssqlpwd
+MSSQLDatabase=mymssqldatabase
