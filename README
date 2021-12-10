@@ -1,3 +1,6 @@
+This service was created by me to copy data from an old active SolidDB database into a more usable MSSQL database and keep up with daily deltas.
+It was made because some of my 64 bit tools could not properly interact with the SolidDB databse.
+
 You need to create a config file for the program to function called config.conf and point to it in Service1.cs line 25
 
 It needs to be formatted like so:
@@ -8,3 +11,5 @@ MSSQLServer=myserver
 MSSQLUid=mymssqluid
 MSSQLPwd=mymssqlpwd
 MSSQLDatabase=mymssqldatabase
+
+Then recompile the program and you should be good to go!
